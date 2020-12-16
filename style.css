@@ -1,0 +1,56 @@
+ /* This makes the website flush with the top */
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+ }
+
+/* Gives body a nice color that isn't just normal white */
+body {
+    background-color: aliceblue;
+    background-size: cover;
+    overflow-x: hidden; /* Keeps users from scrolling up and down */
+}
+
+/* Top of webpage including options */
+.sidebar {
+    background-color: rgb(109, 177, 240);
+    background-size: cover;
+    padding-top: 10px;
+    padding-left: 10px;
+    height: 100vh; /*Viewport height */
+    width: 20vw; /*Viewport width */
+    color: black;
+    float: left;
+}
+
+.sidebar-contents {
+    margin: 30px;
+    margin-left: 0px;
+    padding: 0px;
+    position: relative;
+    left: 0%;
+}
+
+/* Style for refresh */
+.link {
+    /* TODO */
+}
+
+/* Apple font */
+.font {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Grid that snake will be on */
+.game-area {
+    background-color:rgb(153, 214, 176);
+    background-size: cover;
+    height: 100vh;
+    width: 80vw;
+    margin-left: 20vw;
+}
+
+
+
+
