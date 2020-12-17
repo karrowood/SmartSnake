@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartSnake</title>
     <link rel="stylesheet" href="style.css">
+    <script src="out/Queue.js" defer></script>
     <script src="out/grid.js" defer></script>
     <script src="out/Snake.js" defer></script>
     <script src="out/gameLoop.js" defer></script>
@@ -16,6 +17,11 @@
             <!-- Put nav stuff here
             This includes: pick an algorithm, speed, size, go button, and walls maybe?-->
             <h3 class="sidebar-contents">Pick an algorithm</h3>
+            <select name="algorithms" id="algorithms" required>
+                <option value="">Select:</option>
+                <option value="1">Breadth First Search</option>
+                <option value="2">Greedy algorithm</option>
+            </select>
             <h3 class="sidebar-contents">Speed:</h3>
             <h3 class="sidebar-contents" id="score">Score: </h3>
             <button id="go">Go</button>
@@ -23,9 +29,9 @@
     </div>
     <div id="game-area" class="game-area">
         <canvas id="canvas"></canvas>
+    
     </div>
     
-
 
 </body>
 </html>

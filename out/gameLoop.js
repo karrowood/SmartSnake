@@ -10,18 +10,18 @@ function generateRandomLocation() {
     return location;
 }
 var displayScore = document.getElementById('score');
-function gameLoop() {
+function gameLoop(algorithm) {
     let head = new Link(generateRandomLocation(), [0, 0]);
     let snake = new Snake(head);
     let food = generateRandomLocation();
     let running = true;
-    let int = window.setInterval(go, 1);
+    let int = window.setInterval(go, 0);
     function go() {
         context.clearRect(0, 0, width, height);
         context.fillStyle = 'orange';
         context.fillRect(sqWidth * food[0], sqHeight * food[1], sqWidth, sqHeight);
         snake.drawSnake();
-        running = snake.moveSnake(food);
+        running = snake.moveSnake(algorithm, food);
         //Check if snake ate food
         let ateFood = (snake.head.location[0] == food[0]) && (snake.head.location[1] == food[1]);
         if (ateFood) {
@@ -44,6 +44,12 @@ function gameLoop() {
 }
 var button = document.getElementById("go");
 button.onclick = function () {
+    let select = document.getElementById("algorithms");
+    let algorithm = select.value;
+    if (algorithm == '') {
+        alert('Please select and algorithm');
+        return;
+    }
     button.disabled = true;
-    gameLoop();
+    gameLoop(+algorithm);
 };

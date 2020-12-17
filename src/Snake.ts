@@ -23,7 +23,7 @@ class Snake {
         this.body = new Array();
         this.body.push(this.head);
     }
-    moveSnake(food: [number, number]): boolean {
+    moveSnake(algorithm: number, food: [number, number]): boolean {
         /*function goRight(snake: Snake): void {
             snake.head.direction = [1,0];
         }
@@ -118,7 +118,86 @@ class Snake {
             }
             return newDirection;
         }
-        this.head.direction = greedyAlgorithm(this);
+        /*function isSnakeBody(grid: number[][], pos: [number, number]): boolean {
+            let g  = grid;
+            if (g[pos[0]][pos[1]] == 1) return true;
+            return false;
+        }*/
+        function equals(pos1: [number, number], pos2: [number, number]): boolean {
+            if (pos1[0] == pos2[0] && pos1[1] == pos2[1]) return true;
+        return false;
+        }
+        function getPath(path: Map<string, [number, number]>, start: [number, number], cur: [number, number]): [number, number][] {
+            let result = [];
+            let equals = start[0] == cur[0] && start[1] == cur[1];
+            while (!equals) {
+                result.push(cur);
+                let curPos = cur[0] + "," + cur[1];
+                cur = path.get(curPos);
+                equals = start[0] == cur[0] && start[1] == cur[1];
+            }
+            result.push(start);
+            result.reverse();
+            return result;
+        }
+        function bfs(snake: Snake): [number, number][] {
+            //Create Grid
+            /*let grid: number[][] = [];
+            for (let i = 0; i < rows; i++) {
+                grid.push([0]);
+                for (let j = 0; j < columns; j++) {
+                    grid[i][j] = 0;
+                }
+            }
+            for (let i = 0; i < snake.body.length; i++) {
+                grid[snake.body[i].location[0]][snake.body[i].location[1]] = 1;
+            }*/
+            //Now that grid is setup start algorithm
+            let marked: Map<string, boolean> = new Map(); //Hashmap to store booleans if already visited
+            let path: Map<string, [number, number]> = new Map(); //Hashmap to store the previous spots
+            let queue = new Queue();
+            queue.enqueue(snake.head.location);
+            while (!queue.isEmpty()) {
+                let cur = queue.dequeue();
+                let curPos = cur.val[0] + "," + cur.val[1];
+                marked.set(curPos, true);
+                let adjacent: [number, number][] = getAdjacent(cur.val, snake.body);
+                for (let i = 0; i < adjacent.length; i++) {
+                    let node = adjacent[i];
+                    let nodePos = adjacent[i][0] + "," + adjacent[i][1];
+                    if (marked.get(nodePos) != true /*&& !isSnakeBody(grid, node)*/) {
+                        let end  = node[0] == food[0] && node[1] == food[1];
+                        if (end) {
+                            path.set(nodePos, cur.val);
+                            return getPath(path, snake.head.location, node);
+                        }
+                        queue.enqueue(node);
+                        marked.set(nodePos, true);
+                        path.set(nodePos, cur.val);
+                    }
+                }
+            }
+        }
+        if (algorithm == 1) {
+            let path = bfs(this);
+            if (path == undefined) {
+                //Use greedy to decide which way to go
+                this.head.direction = greedyAlgorithm(this);
+            }
+            else {
+                let newLocation = path[1];
+                console.log(this.head.location);
+                console.log(newLocation);
+                this.head.direction = [newLocation[0] - this.head.location[0], newLocation[1] - this.head.location[1]];
+            }
+        }
+        else if (algorithm == 2) {
+            this.head.direction = greedyAlgorithm(this);
+        }    
+        else {
+            return false;
+        }   
+
         if (this.head.direction == [0,0]) {
             return false; //signifying end game
         }
