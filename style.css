@@ -7,14 +7,14 @@
 
 /* Gives body a nice color that isn't just normal white */
 body {
-    background-color: aliceblue;
+    background-color: black;
     background-size: cover;
     overflow-x: hidden; /* Keeps users from scrolling up and down */
 }
 
 /* Top of webpage including options */
 .sidebar {
-    background-color: rgb(109, 177, 240);
+    background-color: rgb(14, 129, 236);
     background-size: cover;
     padding-top: 10px;
     padding-left: 10px;
@@ -54,7 +54,19 @@ body {
     position: absolute;
 }
 canvas {
-    background-color:rgb(153, 214, 176);
+    position: absolute;
+}
+#background {
+    background-color: rgb(30, 255, 0);
     background-size: cover;
+    z-index: 1;
+}
+#game {
+    z-index: 2;
 }
 
+#apple {
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+}

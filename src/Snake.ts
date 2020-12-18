@@ -104,9 +104,8 @@ class Snake {
         return true;
     }
     drawSnake(): void {
-        this.body[0].drawSquare('purple');
-        for (let i = 1; i < this.body.length; i++) {
-            this.body[i].drawSquare('blue');
+        for (let i = 0; i < this.body.length; i++) {
+            this.body[i].drawSquare('rgb(200,0,200)');
         }
     }
     addLink(): void {

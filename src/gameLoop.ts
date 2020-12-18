@@ -18,8 +18,8 @@ function gameLoop(algorithm: number): void {
     let int = window.setInterval(go, 0);
     function go(): void {
         context.clearRect(0,0, width, height);
-        context.fillStyle = 'orange';
-        context.fillRect(sqWidth * food[0], sqHeight * food[1], sqWidth, sqHeight);
+        var apple = document.getElementById("apple") as HTMLImageElement;
+        context.drawImage(apple, sqWidth * food[0], sqHeight * food[1], sqWidth, sqHeight);
         snake.drawSnake();
         running = snake.moveSnake(algorithm, food);
         //Check if snake ate food
@@ -38,6 +38,7 @@ function gameLoop(algorithm: number): void {
         if (!running) {
             clearInterval(int);
             button.disabled = false;
+            select.disabled = false;
             return;
         }
     }
@@ -45,13 +46,14 @@ function gameLoop(algorithm: number): void {
 }
 
 var button = document.getElementById("go") as HTMLInputElement;
+var select = document.getElementById("algorithms") as HTMLSelectElement;
 button.onclick = function() {
-    let select = document.getElementById("algorithms") as HTMLSelectElement;
     let algorithm = select.value;
     if (algorithm == '') {
         alert('Please select and algorithm');
         return;
     }
     button.disabled = true;
+    select.disabled = true;
     gameLoop(+algorithm);
 }
