@@ -81,8 +81,6 @@ class Snake {
             default:
                 return false;
         }
- 
-
         if (this.head.direction == [0,0]) {
             return false; //signifying end game
         }
@@ -105,7 +103,7 @@ class Snake {
     }
     drawSnake(): void {
         for (let i = 0; i < this.body.length; i++) {
-            this.body[i].drawSquare('rgb(200,0,200)');
+            this.body[i].drawSquare('rgba(255, 0, 234, 0.60)');
         }
     }
     addLink(): void {

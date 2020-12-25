@@ -15,12 +15,9 @@ function gameLoop(algorithm: number): void {
     let snake = new Snake(head);
     let food: [number, number] = generateRandomLocation();
     let running = true;
-    let int = window.setInterval(go, 0);
+    let int = window.setInterval(go, speed);
     function go(): void {
         context.clearRect(0,0, width, height);
-        var apple = document.getElementById("apple") as HTMLImageElement;
-        context.drawImage(apple, sqWidth * food[0], sqHeight * food[1], sqWidth, sqHeight);
-        snake.drawSnake();
         running = snake.moveSnake(algorithm, food);
         //Check if snake ate food
         let ateFood = (snake.head.location[0] == food[0]) && (snake.head.location[1] == food[1]);
@@ -35,10 +32,15 @@ function gameLoop(algorithm: number): void {
             snake.addLink();
             displayScore.innerHTML = "Score: " + (snake.body.length - 1);
         }
+        var apple = document.getElementById("apple") as HTMLImageElement;
+        context.drawImage(apple, sqWidth * food[0], sqHeight * food[1], sqWidth, sqHeight);
+        snake.drawSnake();
         if (!running) {
             clearInterval(int);
             button.disabled = false;
             select.disabled = false;
+            sizeSlider.disabled = false;
+            speedSlider.disabled = false;
             return;
         }
     }
@@ -47,7 +49,8 @@ function gameLoop(algorithm: number): void {
 
 var button = document.getElementById("go") as HTMLInputElement;
 var select = document.getElementById("algorithms") as HTMLSelectElement;
-button.onclick = function() {
+
+function buttonClick(): void {
     let algorithm = select.value;
     if (algorithm == '') {
         alert('Please select and algorithm');
@@ -55,5 +58,8 @@ button.onclick = function() {
     }
     button.disabled = true;
     select.disabled = true;
+    sizeSlider.disabled = true;
+    speedSlider.disabled = true;
     gameLoop(+algorithm);
 }
+

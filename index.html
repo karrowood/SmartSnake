@@ -5,37 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartSnake</title>
     <link rel="stylesheet" href="style.css">
-    <script src="out/Queue.js" defer></script>
+    <!-- <link rel="stylesheet" href="freeFrontend/dropdown.css"> -->
+    <link rel="icon" href="images/snake.png">
+    <!-- <script src="freeFrontend/dropdown.js" defer></script> -->
     <script src="out/greedy.js" defer></script>
     <script src="out/bfs.js" defer></script>
-    <script src="out/grid.js" defer></script>
+    <script src="out/setup.js" defer></script>
     <script src="out/Snake.js" defer></script>
     <script src="out/gameLoop.js" defer></script>
 </head>
 <body>
-    <div class="sidebar font">
-        <h1 class="font"><a href="index.html">SmartSnake</a></h1>
-        <div>
-            <!-- Put nav stuff here
-            This includes: pick an algorithm, speed, size, go button, and walls maybe?-->
-            <h3 class="sidebar-contents">Pick an algorithm</h3>
-            <select name="algorithms" id="algorithms" required>
-                <option value="">Select:</option>
-                <option value="1">Breadth First Search</option>
-                <option value="2">Greedy algorithm</option>
-                <option value="3">BFS + Greedy</option>
-                <option value="4">Escape</option>
-            </select>
-            <h3 class="sidebar-contents">Speed:</h3>
-            <h3 class="sidebar-contents" id="score">Score: </h3>
-            <button id="go">Go</button>
+    <div class="topbar font">
+<!-- Put nav stuff here This includes: pick an algorithm, speed, size, go button, and walls maybe?-->
+        <h1 class="left" style="font-size:3vw"><a href="index.html" class="SmartSnake title-animation">SmartSnake</a></h1>
+        <div class="middle text-size">
+            <div class="topbar-contents">
+                <select name="algorithms" id="algorithms" class="select-css" required>
+                    <option value="">Select an Algorithm</option>
+                    <option value="1">Breadth First Search</option>
+                    <option value="2">Greedy algorithm</option>
+                    <option value="3">BFS + Greedy</option>
+                    <option value="4">Escape</option>
+                </select>
+            </div>
+            <div class="topbar-contents">
+                <h2>Size: </h2>
+                <input type="range" min="10" max="40" value="25" id="size" oninput="setupGrid()">
+            </div>
+            <div class="topbar-contents">
+                <h2>Speed:</h2>
+                <input type="range" min="0" max="30" value="15" id="speed" oninput="setSpeed()">
+            </div>
+            <div class="topbar-contents">
+                <button class="button" id="go" onclick="buttonClick()">
+                    <div class="button__content">
+                      <p class="button__text">Go</p>
+                    </div>
+                </button>
+            </div>
         </div>
+        <h1 class="right" id="score" style="font-size: 2vw">Score: </h1>
+        
+        <!-- <button id="pause">Stop</button> -->
     </div>
-    <div id="game-area" class="game-area">
+    <div id="game-area" class="game-area"> 
         <canvas id="background"></canvas>
         <canvas id="game"></canvas>
         <img src="images/apple.png" alt="apple" id="apple">
     </div>
-    
 </body>
 </html>
