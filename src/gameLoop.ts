@@ -10,7 +10,8 @@ function generateRandomLocation(): [number, number] {
 }
 
 var displayScore = document.getElementById('score') as InnerHTML;
-function gameLoop(algorithm: number): void {
+var displayTimer = document.getElementById("timer") as InnerHTML;
+function gameLoop(algorithm: number, start: Date): void {
     let head = new Link(generateRandomLocation(), [0,0]);
     let snake = new Snake(head);
     let food: [number, number] = generateRandomLocation();
@@ -43,8 +44,25 @@ function gameLoop(algorithm: number): void {
             speedSlider.disabled = false;
             return;
         }
+        displayTimer.innerHTML = "Time: " + getTimer(start);
     }
     
+}
+
+function getTimer(start: Date): string {
+    let current = new Date();
+    let seconds = current.getTime() - start.getTime();
+    seconds = Math.floor(seconds / 1000);
+    let minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+    let result: string;
+    if (seconds < 10) {
+        result = '' + minutes + ':0' + seconds;
+    }
+    else {
+        result = '' + minutes + ':' + seconds;
+    }
+    return result;
 }
 
 var button = document.getElementById("go") as HTMLInputElement;
@@ -60,6 +78,7 @@ function buttonClick(): void {
     select.disabled = true;
     sizeSlider.disabled = true;
     speedSlider.disabled = true;
-    gameLoop(+algorithm);
+    var date = new Date();
+    gameLoop(+algorithm, date);
 }
 

@@ -10,7 +10,8 @@ function generateRandomLocation() {
     return location;
 }
 var displayScore = document.getElementById('score');
-function gameLoop(algorithm) {
+var displayTimer = document.getElementById("timer");
+function gameLoop(algorithm, start) {
     let head = new Link(generateRandomLocation(), [0, 0]);
     let snake = new Snake(head);
     let food = generateRandomLocation();
@@ -43,7 +44,23 @@ function gameLoop(algorithm) {
             speedSlider.disabled = false;
             return;
         }
+        displayTimer.innerHTML = "Time: " + getTimer(start);
     }
+}
+function getTimer(start) {
+    let current = new Date();
+    let seconds = current.getTime() - start.getTime();
+    seconds = Math.floor(seconds / 1000);
+    let minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+    let result;
+    if (seconds < 10) {
+        result = '' + minutes + ':0' + seconds;
+    }
+    else {
+        result = '' + minutes + ':' + seconds;
+    }
+    return result;
 }
 var button = document.getElementById("go");
 var select = document.getElementById("algorithms");
@@ -57,5 +74,6 @@ function buttonClick() {
     select.disabled = true;
     sizeSlider.disabled = true;
     speedSlider.disabled = true;
-    gameLoop(+algorithm);
+    var date = new Date();
+    gameLoop(+algorithm, date);
 }

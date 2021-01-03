@@ -13,6 +13,7 @@ function setupGrid() {
     width = gameArea.offsetWidth;
     height = gameArea.offsetHeight;
     var size = +sizeSlider.value;
+    //New
     //Sizing calculations
     columns = Math.floor(width / size);
     rows = Math.floor(height / size);
@@ -57,6 +58,10 @@ function setSpeed() {
     speed = Math.abs(30 - speed);
 }
 setSpeed();
+//Causes page to reload when window is resized
+window.onresize = function () {
+    location.reload();
+};
 // let offscreen = canvas.transferControlToOffscreen();
 // canvas.offscreenCanvas = document.createElement('canvas');
 // canvas.offscreenCanvas.width = canvas.width;
