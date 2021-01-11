@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartSnake</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href="freeFrontend/dropdown.css"> -->
     <link rel="icon" href="images/snake.png">
-    <!-- <script src="freeFrontend/dropdown.js" defer></script> -->
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="out/greedy.js" defer></script>
     <script src="out/bfs.js" defer></script>
     <script src="out/setup.js" defer></script>
     <script src="out/Snake.js" defer></script>
     <script src="out/gameLoop.js" defer></script>
+    <script src="out/popup.js" defer></script>
 </head>
 <body>
     <div class="topbar font">
-<!-- Put nav stuff here This includes: pick an algorithm, speed, size, go button, and walls maybe?-->
         <h1 class="left" style="font-size:3vw"><a href="index.html" class="SmartSnake title-animation">SmartSnake</a></h1>
         <div class="middle text-size">
             <div class="topbar-contents">
                 <select name="algorithms" id="algorithms" class="select-css" required>
                     <option value="">Select an Algorithm</option>
                     <option value="1">Breadth First Search</option>
-                    <option value="2">Greedy algorithm</option>
+                    <option value="2">Greedy</option>
                     <option value="3">BFS + Greedy</option>
                     <option value="4">Escape</option>
                 </select>
@@ -46,12 +46,58 @@
         </div>
         <h1 class="right" id="score" style="font-size: 2vw">Score: </h1>
         <h1 class="right" id="timer" style="font-size: 2vw">Time: 0:00</h1>
-        <!-- <button id="pause">Stop</button> -->
+        <div class="further-right">
+            <button class="about" id="about">About</button>
+        </div>
     </div>
     <div id="game-area" class="game-area"> 
         <canvas id="background"></canvas>
         <canvas id="game"></canvas>
         <img src="images/apple.png" alt="apple" id="apple">
     </div>
+
+
+    <!-- From Free Frontend -->
+    <!-- modal -->
+    <div class="modal-overlay">
+        <div class="modal">
+            <a class="close-modal">
+            <svg viewBox="0 0 20 20">
+                <path fill="#000000" d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
+            </svg>
+            </a><!-- close modal -->
+            <div class="modal-content font" style="color: rgb(80, 80, 80);">
+                <h2>Breadth First Search</h2>
+                <p>
+                    At each movement of the snake, it calculates the shortest path to the apple by using
+                    the breadth first search algorithm to avoid its own body. This algorithm is somewhat inefficient, because
+                    at every movement a new BFS is run, and the snake only uses the first direction and then scraps the rest
+                    of the path it is given. This causes the snake to only die when it has trapped itself
+                    and can no longer see the apple.
+                </p>
+                <h2>Greedy</h2>
+                <p>
+                    This algorithm can work much faster than the other three, but the snake will probably not survive as long.
+                    This algorithm tells the snake where to move based on the closest option to the food regardless of the shortest path.
+                    Because of this the snake tends to trap itself a lot more often causing this to be the worst algorithm.
+                </p>
+                <h2>BFS + Greedy</h2>
+                <p>
+                    This algorithm combines the two above. When the snake can see the apple normally it will use the BFS algorithm
+                    to decide which way to move. The difference between this algorithm and the BFS algorithm is that when this snake
+                    cannot see the apple it will decide which way to move using the Greedy algorithm from above. This causes this algorithm
+                    to perform better than both BFS and Greedy by themselves. 
+                </p>
+                <h2>Escape</h2>
+                <p>
+                    Similarly to BFS + Greedy this algorithm also uses BFS when it can see the apple, but when it loses sight of the apple
+                    instead of using the greedy algorithm from above it does the opposite. The greedy algorithm will move the snake closer
+                    to the food regardless of where the rest of the snake body is. The escape portion of this algorithm causes the snake to
+                    move away from the apple when it cannot see it. I decided to create this algorithm, because it forces the snake to create
+                    an opening for itself to go and get the apple.
+                </p>
+            </div><!-- content -->
+        </div><!-- modal -->
+    </div><!-- overlay -->
 </body>
 </html>
