@@ -1,4 +1,5 @@
 # SmartSnake
+
 SmartSnake is a web application I built using HTML/CSS and TypeScript.
 
 I built this application based on the famous snake game. I have previously built my own version of that game.
@@ -10,3 +11,5 @@ are better than others. I also created it to where the user can mess around with
 the snake will go. Even at the highest speed, some of the algorithms will seem slow when the game area is large.
 
 When creating this web app I used some CSS from freefrontend.com to make my app look better.
+
+Play around with it at https://karrowood.github.io/SmartSnake/
