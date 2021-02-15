@@ -13,7 +13,6 @@ function setupGrid() {
     width = gameArea.offsetWidth;
     height = gameArea.offsetHeight;
     var size = +sizeSlider.value;
-    //New
     //Sizing calculations
     columns = Math.floor(width / size);
     rows = Math.floor(height / size);
@@ -59,6 +58,6 @@ function setSpeed() {
 }
 setSpeed();
 //Causes page to reload when window is resized
-window.onresize = function () {
+/*window.onresize = function() {
     location.reload();
-};
+}*/
